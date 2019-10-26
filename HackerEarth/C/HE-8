@@ -1,0 +1,35 @@
+#include <stdio.h>
+unsigned int countSetBits(long long n) 
+{ 
+    if (n == 0) 
+        return 0; 
+    else
+        return 1 + countSetBits(n & (n - 1)); 
+
+}
+int count(long long x)
+{
+	if (x == 0) return 0;
+	else
+	{
+		return ((x & 1) + count(x >> 1));
+	}
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	long long a, b, i;
+	unsigned long long ans;
+	while(t--)
+	{
+		ans = 0;
+		scanf("%lld %lld", &a, &b);
+		for(i = a + 1; i < b; i++)
+		{
+			 ans += countSetBits(i);
+		}
+		printf("%llu\n", ans);
+	}
+}
+	
