@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<math.h>
+int main () {
+	int t, n, m, a1, b1, flag, min;
+	float root; 
+	double x;
+	double* temp = &x;
+	scanf("%d", &t);
+	while(t--)
+	{
+		scanf("%d", &n);
+		scanf("%d", &m);
+		int a[n];
+		int b[m];
+		for(int i = 0; i < n; i++)scanf("%d", &a[i]);
+		for(int i = 0; i < m; i++)scanf("%d", &b[i]);
+		a1 = 0;
+		b1 = 0;
+		min = 600000;
+		for(int i = 0; i < n; i++)
+		{
+			flag = 0;
+			for(int j = 0; j < m;j ++)
+			{
+				root = a[i] * b[j];
+				if(modf(cbrt(root), temp) == 0) 
+				{
+					b1++;
+				}
+			}
+			//if(flag == 1) a1++;
+			//if(a1 < min) min = a1;
+		}
+		//a1 = min;
+		min = 600000;
+		for(int i = 0; i < m; i++)
+		{
+			flag = 0;
+			for(int j = 0; j < n;j ++)
+			{
+				root = b[i] * a[j];
+				if(modf(cbrt(root), temp) == 0) 
+				{
+					//printf("%d %d\n", a[i], b[j]);
+					//flag = 1;
+					a1++;
+				}
+			}
+			//if(flag == 1) b1++;
+			//if(b1 < min) min = b1;
+		}
+		//b1 = min;
+		printf("%d %d\n", a1, b1);
+		if (a1 == 0) printf("-1\n");
+		else printf("%d\n", (a1 * a1) + (b1 * b1));
+	}
+}
