@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+int compare(const void * a, const void * b) 
+{ 
+    return ( *(int*)a - *(int*)b ); 
+} 
+void swap(int *x, int *y)
+{
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+}
+int main()
+{
+	int t, n, ans, ans1;
+	scanf("%d", &t);
+	while(t--)
+	{
+		scanf("%d", &n);
+		ans = 0, ans1 = 0;
+		int a[n], sa[n], a1[n], sa1[n];
+		for(int i = 0; i < n; i++)
+		{
+			scanf("%d", &a[i]);
+			sa[i] = a[i];
+			a1[i] = a[i];
+		}
+		qsort(sa, n, sizeof(int), compare);
+		for(int i = 0; i < n; i++)
+		{
+			sa1[n-i-1] = a[i];
+		}
+		for(int i = 0; i < (n - 1); i++)
+		{
+			if(a[i] != sa[i])
+			{
+				for(int j = i + 1; j < n; j++)
+				{
+					if(a[j] == sa[i])
+					{
+						swap(&a[j], &a[i]);
+						ans++;
+					}
+				}
+			}
+			//printf("%d ", a[i]);
+		}
+		printf("\n");
+		for(int i = 0; i < (n - 1); i++)
+		{
+			if(a1[i] != sa1[i])
+			{
+				for(int j = i + 1; j < n; j++)
+				{
+					if(a1[j] == sa1[i])
+					{
+						swap(&a1[j], &a1[i]);
+						ans1++;
+					}
+				}
+			}
+		}
+		printf("%d %d\n", ans, ans1);
+		if(ans < ans1) printf("%d\n", ans);
+		else printf("%d\n", ans1);
+	}
+}
