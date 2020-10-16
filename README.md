@@ -15,8 +15,7 @@ for eg. Codeforces/CPP/112-A.cpp
 6. Wait for confirmation
 
 
-P.S. Submit your solutions in 4 sections to apply for Hacktoberfest'20.
+P.S. Submit your solutions to apply for Hacktoberfest'20.
 
 https://hacktoberfest.digitalocean.com/
 
-Enjoy the free Tee !
