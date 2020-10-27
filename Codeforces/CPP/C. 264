@@ -1,0 +1,113 @@
+// https://codeforces.com/contest/264/problem/C
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+#define mod 1000000007
+
+ll gcd(ll aa,ll bb) { if(aa==0) return bb; return(bb%aa,aa); }
+
+ll dp[100005]={0};
+ll aa[100005]={0};        
+
+int main()
+{
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+    ll n,q;
+    cin>>n>>q;
+    
+    vector < ll > v(n+1),c(n+1);
+    
+    for(int i=0;i<n;i++)
+        cin>>v[i+1];
+    
+    for(int i=0;i<n;i++)
+        cin>>c[i+1];
+    
+    while(q--)
+    {
+        ll a,b;
+        cin>>a>>b;
+        
+        ll maxi=-1000000000000000,mini=1000000000000000;
+        
+        for(int i=0;i<=n;i++)
+        {
+            dp[i]=0;
+            aa[i]=maxi;
+        }
+        ll p1=0,n1=0,cp1=0,cn1=0,cp2=0,cn2=0,n2=0,p2=0;
+        for(int i=1;i<=n;i++)
+        {
+            dp[i]=b*v[i];
+           
+            if(aa[c[i]]!=maxi)
+            {
+                ll dd=aa[c[i]]+(a*v[i]);
+                dp[i]=max(dp[i],dd);
+            }
+            
+          
+            if(i!=1)
+            {
+                if(cp1!=0 && c[i]!=cp1)
+                {
+                    ll dd=p1+v[i]*b;
+                    dp[i]=max(dp[i],dd);
+                }
+                
+                if(cp2!=0 && c[i]!=cp2)
+                {
+                    ll dd=p2+v[i]*b;
+                    dp[i]=max(dp[i],dd);
+                }
+            }
+            else
+            {
+                p1=max(p1,dp[i]);
+                n1=min(n1,dp[i]);
+                
+                cp1=c[i];
+                cn1=c[i];
+            }
+            
+            if(dp[i] > p1 || c[i]==cp1)
+            {
+                if(c[i]==cp1)
+                    p1=max(p1,dp[i]);
+                else
+                {
+                    cp2=cp1;
+                    p2=p1;
+                    p1=dp[i];
+                    cp1=c[i];
+                }
+            }
+            else if(dp[i] > p2)
+            {
+                cp2=c[i];
+                p2=dp[i];
+            }
+            
+        
+            
+            
+           // cout<<i<<" "<<pos<<" "<<neg<<endl;
+            
+            aa[c[i]]=max(aa[c[i]],dp[i]);}
+    
+        
+        
+        
+        
+        ll ans=max((ll)0,p1);
+        cout<<ans<<endl;
+    }
+    
+    
+    return 0;
+}
